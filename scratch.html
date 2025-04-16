@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Flour 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body style="scroll-behavior: smooth;">
+
+    <!-- Top-right anchor link -->
+    <div style="position: absolute; top: 20px; right: 20px;">
+        <a href="#bakeoff" style="text-decoration: none; font-weight: bold; color: #000;">Bake-Off Competition</a>
+    </div>
+
+    <h1>The Flour Four</h1>
+    <span class="subheading">Paige's 4 baking recipes to instantly make anyone think you’re a top-notch baker.</span>
+    <br>
+    <div class="quote">“Baking is both physical and mental therapy.” – Mary Berry</div>
+
+    <div class="recipe-images">
+        <img src="https://www.cookingclassy.com/wp-content/uploads/2012/12/45+minute+cinnamon+rolls8-392x510.jpg" alt="Cinnamon Rolls">
+        <img src="https://celebratingsweets.com/wp-content/uploads/2022/05/Cookies-and-Cream-Cookies-3-680x1020.jpg" alt="Cookies and Cream">
+        <img src="https://bromabakery.com/wp-content/uploads/2022/05/Strawerry-Shortcake-Cake-2.jpg" alt="Strawberry Shortcake">
+        <img src="https://www.garnishandglaze.com/wp-content/uploads/2015/02/molten-lava-cake-9.jpg" alt="Molten Lava Cake">
+    </div>
+
+    <ol>
+        <li>
+            Cinnamon Rolls 
+            <a href="https://www.kingarthurbaking.com/recipes/soft-cinnamon-rolls-recipe" target="_blank" rel="noopener noreferrer">[View Full Recipe]</a>
+            <ul>
+                <li>Learn how to properly use instant yeast for quick, fluffy dough.</li>
+            </ul>
+        </li>
+        <br>
+
+        <li>Cookies and Cream Oreo Cookies
+            <a href="https://www.twopeasandtheirpod.com/cookies-and-cream-cookies/" target="_blank" rel="noopener noreferrer">[View Full Recipe]</a>
+            <ul>
+                <li>Master the art of creating a chewy cookie consistency every time.</li>
+            </ul>
+        </li>
+        <br>
+
+        <li>Strawberry Shortcake
+            <a href="https://bromabakery.com/strawberry-shortcake-cake/" target="_blank" rel="noopener noreferrer">[View Full Recipe]</a>
+            <ul>
+                <li>Improve your cake decorating and layering presentation skills.</li>
+            </ul>
+        </li>
+        <br>
+
+        <li>Molten Lava Cakes
+            <a href="https://bromabakery.com/molten-lava-cakes/" target="_blank" rel="noopener noreferrer">[View Full Recipe]</a>
+            <ul>
+                <li>Perfect your bake times for that iconic gooey center.</li>
+            </ul>
+        </li>
+        <br>
+    </ol>
+
+    <!-- Navigation -->
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="bootstrap page/index.html">Resume & Bakery Tip Video</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="game.html">Bakery Game</a></li>
+        </ul>
+    </div>
+
+    <!-- Tableau Chart Section -->
+    <div id="bakeoff" class="tableauPlaceholder" style="position: relative;">
+        <noscript>
+            <a href="#"><img alt=' ' src='https://public.tableau.com/static/images/gc/gcbo/TheGreatCookieBakeOff/1_rss.png' style='border: none' /></a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='gcbo/TheGreatCookieBakeOff' />
+            <param name='tabs' value='yes' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/gc/gcbo/TheGreatCookieBakeOff/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+        </object>
+    </div>
+
+    <!-- Tableau Script -->
+    <script type='text/javascript'>
+        var divElement = document.getElementById('bakeoff');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.width = '600px';
+        vizElement.style.height = '850px';
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Great Bake Off</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8f0;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #d2691e;
+    }
+
+    #stats {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    #game-area {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      margin: 20px auto;
+      border: 2px solid #d2691e;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .item {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .item:hover {
+      transform: scale(1.1);
+    }
+
+    #game-over {
+      display: none;
+      font-size: 24px;
+      color: red;
+      margin-top: 20px;
+    }
+
+    #restart-btn {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #d2691e;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    #restart-btn:hover {
+      background-color: #a0522d;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Great Bake Off</h1>
+  <div id="stats">
+    Score: <span id="score">0</span> |
+    Lives: <span id="lives">3</span> |
+    High Score: <span id="high-score">0</span>
+  </div>
+  <div id="game-area"></div>
+  <div id="game-over">Game Over!</div>
+  <button id="restart-btn">Restart Game</button>
+
+  <script>
+    const gameArea = document.getElementById('game-area');
+    const scoreDisplay = document.getElementById('score');
+    const livesDisplay = document.getElementById('lives');
+    const highScoreDisplay = document.getElementById('high-score');
+    const gameOverText = document.getElementById('game-over');
+    const restartBtn = document.getElementById('restart-btn');
+
+    const desserts = [
+      'https://cdn-icons-png.flaticon.com/512/1046/1046784.png', // Cupcake
+      'https://cdn-icons-png.flaticon.com/512/1046/1046792.png', // Pie
+      'https://cdn-icons-png.flaticon.com/512/1046/1046761.png'  // Cinnamon Roll
+    ];
+
+    const insects = [
+      'https://cdn-icons-png.flaticon.com/512/616/616408.png', // Ant
+      'https://cdn-icons-png.flaticon.com/512/616/616424.png', // Cricket
+      'https://cdn-icons-png.flaticon.com/512/616/616430.png'  // Beetle
+    ];
+
+    let score = 0;
+    let lives = 3;
+    let highScore = localStorage.getItem('bakeOffHighScore') || 0;
+    let gameInterval;
+    let spawnRate = 1500;
+
+    highScoreDisplay.textContent = highScore;
+
+    function createItem() {
+      const isDessert = Math.random() < 0.7;
+      const img = document.createElement('img');
+      img.src = isDessert
+        ? desserts[Math.floor(Math.random() * desserts.length)]
+        : insects[Math.floor(Math.random() * insects.length)];
+      img.classList.add('item');
+
+      const x = Math.random() * (gameArea.clientWidth - 60);
+      img.style.left = `${x}px`;
+      img.style.top = `${gameArea.clientHeight}px`; // start at bottom
+
+      gameArea.appendChild(img);
+
+      // Animate item moving up
+      let top = gameArea.clientHeight;
+      const speed = 2 + score * 0.05; // increases over time
+      const moveInterval = setInterval(() => {
+        top -= speed;
+        img.style.top = `${top}px`;
+
+        if (top <= -60) {
+          clearInterval(moveInterval);
+          if (gameArea.contains(img)) {
+            gameArea.removeChild(img);
+            if (isDessert) {
+              lives--;
+              updateStats();
+              checkGameOver();
+            }
+          }
+        }
+      }, 20);
+
+      img.addEventListener('click', () => {
+        clearInterval(moveInterval);
+        if (isDessert) {
+          score++;
+        } else {
+          lives--;
+        }
+        updateStats();
+        checkGameOver();
+        gameArea.removeChild(img);
+      });
+    }
+
+    function updateStats() {
+      scoreDisplay.textContent = score;
+      livesDisplay.textContent = lives;
+    }
+
+    function checkGameOver() {
+      if (lives <= 0) {
+        endGame();
+      }
+    }
+
+    function startGame() {
+      score = 0;
+      lives = 3;
+      updateStats();
+      gameOverText.style.display = 'none';
+      restartBtn.style.display = 'none';
+
+      if (gameInterval) clearInterval(gameInterval);
+      gameInterval = setInterval(() => {
+        createItem();
+        if (spawnRate > 500) spawnRate -= 10;
+      }, spawnRate);
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      gameOverText.style.display = 'block';
+      restartBtn.style.display = 'inline-block';
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('bakeOffHighScore', highScore);
+        highScoreDisplay.textContent = highScore;
+      }
+    }
+
+    restartBtn.addEventListener('click', startGame);
+
+    window.onload = startGame;
+  </script>
+</body>
+</html>
